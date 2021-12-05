@@ -1,0 +1,1 @@
+Simple restapi project developed with fastapi
