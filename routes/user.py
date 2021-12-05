@@ -20,7 +20,7 @@ async def create_user(user: UserCreate):
     if await db.user.find_one({'national_id': user_dict['national_id']}):
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail='This national ID has already been registered')
 
-    user_dict['password'] = get_password_hash(user_dict['password'])
+    user_dict['password'] = get_password_hash(user_dict['password'])  #  hashing the password
     created_user = await db.user.insert_one(user_dict)
     created_user = await db.user.find_one({'_id': created_user.inserted_id})
     return serialize_dict(created_user)
